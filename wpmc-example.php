@@ -23,34 +23,34 @@ add_action('wpmc_entities', function($entities){
                 'label' => 'Nome',
                 'type' => 'text',
                 'required' => true,
-                'flags' => ['list','sort','view','create','update'],
+                'flags' => ['list','sort','view','add','edit'],
             ],
             'student_id' => [
                 'label' => 'Estudante',
                 'type' => 'belongs_to',
                 'ref_entity' => 'Student',
                 'required' => true,
-                'flags' => ['list','sort','view','create','update'],
+                'flags' => ['list','sort','view','add','edit'],
             ],
             'lastname' => [
                 'label' => 'Segundo nome',
                 'type' => 'text',
-                'flags' => ['list','sort','view','create','update'],
+                'flags' => ['list','sort','view','add','edit'],
             ],
             'email' => [
                 'label' => 'E-mail',
                 'type' => 'email',
-                'flags' => ['list','sort','view','create','update'],
+                'flags' => ['list','sort','view','add','edit'],
             ],
             'phone' => [
                 'label' => 'Telefone',
                 'type' => 'integer',
-                'flags' => ['list','sort','view','create','update'],
+                'flags' => ['list','sort','view','add','edit'],
             ],
             'cellphone' => [
                 'label' => 'Celular',
                 'type' => 'text',
-                'flags' => ['list','sort','view','create','update'],
+                'flags' => ['list','sort','view','add','edit'],
             ],
         ]
     ];
@@ -67,24 +67,24 @@ add_action('wpmc_entities', function($entities){
                 'label' => 'Nome',
                 'type' => 'text',
                 'required' => true,
-                'flags' => ['list','sort','view','create','update'],
+                'flags' => ['list','sort','view','add','edit'],
             ],
             'lastname' => [
                 'label' => 'Segundo nome',
                 'type' => 'text',
-                'flags' => ['list','sort','view','create','update'],
+                'flags' => ['list','sort','view','add','edit'],
             ],
             'email' => [
                 'label' => 'E-mail',
                 'type' => 'email',
-                'flags' => ['list','sort','view','create','update'],
+                'flags' => ['list','sort','view','add','edit'],
             ],
             'contacts' => [
                 'label' => 'Contatos',
                 'type' => 'has_many',
                 'ref_entity' => 'Contact',
                 'ref_column' => 'student_id',
-                'flags' => ['list','sort','view','create','update'],
+                'flags' => ['list','sort','view','add','edit'],
             ],
         ]
     ];
