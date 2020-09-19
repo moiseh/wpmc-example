@@ -11,7 +11,7 @@
 defined( 'ABSPATH' ) or die( 'Not allowed' );
 
 add_action('wpmc_entities', function($entities){
-    $entities['Contact'] = [
+    $entities['contact'] = [
         'table_name' => 'sys_contacts',
         'default_order' => 'name',
         'display_field' => 'name',
@@ -28,7 +28,7 @@ add_action('wpmc_entities', function($entities){
             'student_id' => [
                 'label' => 'Estudante',
                 'type' => 'belongs_to',
-                'ref_entity' => 'Student',
+                'ref_entity' => 'student',
                 'required' => true,
                 'flags' => ['list','sort','view','add','edit'],
             ],
@@ -55,7 +55,7 @@ add_action('wpmc_entities', function($entities){
         ]
     ];
 
-    $entities['Student'] = [
+    $entities['student'] = [
         'table_name' => 'sys_students',
         'default_order' => 'name',
         'display_field' => 'name',
@@ -82,7 +82,7 @@ add_action('wpmc_entities', function($entities){
             'contacts' => [
                 'label' => 'Contatos',
                 'type' => 'has_many',
-                'ref_entity' => 'Contact',
+                'ref_entity' => 'contact',
                 'ref_column' => 'student_id',
                 'flags' => ['list','sort','view','add','edit'],
             ],
