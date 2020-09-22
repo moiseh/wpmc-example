@@ -11,66 +11,44 @@
 defined( 'ABSPATH' ) or die( 'Not allowed' );
 
 add_action('wpmc_entities', function($entities){
-    $entities['contact'] = [
-        'table_name' => 'sys_contacts',
+    $entities['team'] = [
+        'table_name' => 'mc_teams',
         'default_order' => 'name',
         'display_field' => 'name',
-        'singular' => 'Contact',
-        'plural' => 'Contacts',
-        'restrict_logged' => 'user_id',
+        'singular' => 'Team',
+        'plural' => 'Teams',
         'fields' => [
             'name' => [
-                'label' => 'Nome',
+                'label' => 'Name',
                 'type' => 'text',
                 'required' => true,
                 'flags' => ['list','sort','view','add','edit'],
             ],
-            'student_id' => [
-                'label' => 'Estudante',
-                'type' => 'belongs_to',
-                'ref_entity' => 'student',
-                'required' => true,
-                'flags' => ['list','sort','view','add','edit'],
-            ],
-            'lastname' => [
-                'label' => 'Segundo nome',
-                'type' => 'text',
-                'flags' => ['list','sort','view','add','edit'],
-            ],
-            'email' => [
-                'label' => 'E-mail',
-                'type' => 'email',
-                'flags' => ['list','sort','view','add','edit'],
-            ],
-            'phone' => [
-                'label' => 'Telefone',
-                'type' => 'integer',
-                'flags' => ['list','sort','view','add','edit'],
-            ],
-            'cellphone' => [
-                'label' => 'Celular',
-                'type' => 'text',
+            'players' => [
+                'label' => 'Players',
+                'type' => 'one_to_many',
+                'ref_entity' => 'player',
+                'ref_column' => 'team_id',
                 'flags' => ['list','sort','view','add','edit'],
             ],
         ]
     ];
 
-    $entities['student'] = [
-        'table_name' => 'sys_students',
+    $entities['player'] = [
+        'table_name' => 'mc_players',
         'default_order' => 'name',
         'display_field' => 'name',
-        'singular' => 'Student',
-        'plural' => 'Students',
-        'restrict_logged' => 'user_id',
+        'singular' => 'Player',
+        'plural' => 'Players',
         'fields' => [
             'name' => [
-                'label' => 'Nome',
+                'label' => 'Name',
                 'type' => 'text',
                 'required' => true,
                 'flags' => ['list','sort','view','add','edit'],
             ],
             'lastname' => [
-                'label' => 'Segundo nome',
+                'label' => 'Last name',
                 'type' => 'text',
                 'flags' => ['list','sort','view','add','edit'],
             ],
@@ -79,11 +57,36 @@ add_action('wpmc_entities', function($entities){
                 'type' => 'email',
                 'flags' => ['list','sort','view','add','edit'],
             ],
-            'contacts' => [
-                'label' => 'Contatos',
+            'team_id' => [
+                'label' => 'Team',
+                'type' => 'belongs_to',
+                'ref_entity' => 'team',
+                'required' => true,
+                'flags' => ['list','sort','view','add','edit'],
+            ],
+        ]
+    ];
+
+    $entities['game'] = [
+        'table_name' => 'mc_games',
+        'default_order' => 'name',
+        'display_field' => 'name',
+        'singular' => 'Game',
+        'plural' => 'Games',
+        'fields' => [
+            'name' => [
+                'label' => 'Name',
+                'type' => 'text',
+                'required' => true,
+                'flags' => ['list','sort','view','add','edit'],
+            ],
+            'players' => [
+                'label' => 'Players',
                 'type' => 'has_many',
-                'ref_entity' => 'contact',
-                'ref_column' => 'student_id',
+                'ref_entity' => 'player',
+                'pivot_table' => 'mc_game_players',
+                'pivot_left' => 'game_id',
+                'pivot_right' => 'player_id',
                 'flags' => ['list','sort','view','add','edit'],
             ],
         ]
