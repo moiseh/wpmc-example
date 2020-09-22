@@ -22,14 +22,12 @@ add_action('wpmc_entities', function($entities){
                 'label' => 'Name',
                 'type' => 'text',
                 'required' => true,
-                'flags' => ['list','sort','view','add','edit'],
             ],
             'players' => [
                 'label' => 'Players',
                 'type' => 'one_to_many',
                 'ref_entity' => 'player',
                 'ref_column' => 'team_id',
-                'flags' => ['list','sort','view','add','edit'],
             ],
         ]
     ];
@@ -45,24 +43,21 @@ add_action('wpmc_entities', function($entities){
                 'label' => 'Name',
                 'type' => 'text',
                 'required' => true,
-                'flags' => ['list','sort','view','add','edit'],
             ],
             'lastname' => [
                 'label' => 'Last name',
                 'type' => 'text',
-                'flags' => ['list','sort','view','add','edit'],
+                'restrict_to' => ['sort','view','add','edit'],
             ],
             'email' => [
                 'label' => 'E-mail',
                 'type' => 'email',
-                'flags' => ['list','sort','view','add','edit'],
             ],
             'team_id' => [
                 'label' => 'Team',
                 'type' => 'belongs_to',
                 'ref_entity' => 'team',
                 'required' => true,
-                'flags' => ['list','sort','view','add','edit'],
             ],
         ]
     ];
@@ -78,7 +73,6 @@ add_action('wpmc_entities', function($entities){
                 'label' => 'Name',
                 'type' => 'text',
                 'required' => true,
-                'flags' => ['list','sort','view','add','edit'],
             ],
             'players' => [
                 'label' => 'Players',
@@ -87,7 +81,6 @@ add_action('wpmc_entities', function($entities){
                 'pivot_table' => 'mc_game_players',
                 'pivot_left' => 'game_id',
                 'pivot_right' => 'player_id',
-                'flags' => ['list','sort','view','add','edit'],
             ],
         ]
     ];
