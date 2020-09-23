@@ -100,10 +100,13 @@ add_filter('wpmc_entity_query', function(WPMC_Query_Builder $qb, WPMC_Entity $en
     return $qb;
 }, 10, 2);
 
-// example how to alter the default per-page listing rows
-add_filter('wpmc_list_per_page', function(){
-    return 15;
-}, 10, 1);
+// example how to add filters and/or actions just when viewing specific entity list or form
+add_action('wpmc_before_entity_player', function($entity){
+    // example how to alter the default per-page listing rows
+    add_filter('wpmc_list_per_page', function(){
+        return 4;
+    }, 10, 1);
+});
 
 // example how to create policies to check if user can do something with specific entity IDs
 add_filter('wpmc_can_manage', function(WPMC_Entity $entity, $ids = []){
