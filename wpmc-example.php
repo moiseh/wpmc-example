@@ -88,47 +88,39 @@ add_action('wpmc_entities', function($entities){
     return $entities;
 }, 10, 2);
 
+// example how to add filters and/or actions just when viewing specific entity list or form
+add_action('wpmc_before_entity', function(WPMC_Entity $entity){
+
+    // protect user from manage not allowed IDs and other policies
+    require_once 'inc.global.security.php';
+
+    switch($entity->identifier()) {
+        case 'player':
+            // example how to alter the default per-page listing rows
+            add_filter('wpmc_list_per_page', function(){
+                return 4;
+            }, 10, 1);
+
+            // example how to add custom actions
+            include __DIR__ . '/inc.player.action.set_team.php';
+        break;
+        default:
+        case 'my_entity_1':
+        case 'my_entity_2':
+        break;
+    }
+});
+
 // example how to filter entities by current logged user_id
-add_filter('wpmc_entity_query', function(WPMC_Query_Builder $qb, WPMC_Entity $entity){
+add_filter('wpmc_entity_query', function(WPMC_Query_Builder $query, WPMC_Entity $entity){
     switch ( wpmc_current_entity() ) {
         case 'my_entity_1':
         case 'my_entiti_2':
-            $qb->where("{$entity->tableName}.user_id", '=', get_current_user_id()); 
+            $query->where("{$entity->tableName}.user_id", '=', get_current_user_id()); 
         break;
     }
     
-    return $qb;
-}, 10, 2);
-
-// example how to add filters and/or actions just when viewing specific entity list or form
-add_action('wpmc_before_entity_player', function($entity){
-    // example how to alter the default per-page listing rows
-    add_filter('wpmc_list_per_page', function(){
-        return 4;
-    }, 10, 1);
-});
-
-// example how to create policies to check if user can do something with specific entity IDs
-add_filter('wpmc_can_manage', function(WPMC_Entity $entity, $ids = []){
-    global $wpdb;
-
-    if ( !current_user_can('activate_plugins') ) {
-        return false;
-    }
-
-    switch ( wpmc_current_entity() ) {
-        case 'my_entity_1':
-        case 'my_entiti_2':
-            $uid = get_current_user_id();
-            $ids = implode(',', $ids);
-            $notAllowedIds = $wpdb->get_var("SELECT COUNT(id) FROM {$entity->tableName} WHERE id IN({$ids}) AND user_id <> {$uid}");
-            if ( $notAllowedIds > 0 ) {
-                return false;
-            }
-        break;
-    }
-
-    return true;
+    return $query;
 }, 10, 2);
 
 // example how to modify entity data before save form to database
