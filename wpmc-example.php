@@ -89,12 +89,12 @@ add_action('wpmc_entities', function($entities){
 }, 10, 2);
 
 // example how to add filters and/or actions just when viewing specific entity list or form
-add_action('wpmc_before_entity', function(WPMC_Entity $entity){
+add_action('wpmc_before_entity', function($entity){
 
     // protect user from manage not allowed IDs and other policies
     require_once 'inc.global.security.php';
 
-    switch($entity->identifier()) {
+    switch(wpmc_current_entity()) {
         case 'player':
             // example how to alter the default per-page listing rows
             add_filter('wpmc_list_per_page', function(){
@@ -125,6 +125,6 @@ add_filter('wpmc_entity_query', function(WPMC_Query_Builder $query, WPMC_Entity 
 
 // example how to modify entity data before save form to database
 add_filter('wpmc_process_save_data', function($item, WPMC_Entity $entity){
-    $item['user_id'] = get_current_user_id();
+    // $item['user_id'] = get_current_user_id();
     return $item;
 }, 10, 2);

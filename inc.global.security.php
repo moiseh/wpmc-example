@@ -30,7 +30,7 @@ if ( !function_exists('my_check_manage') ) {
 // $requestIds = wpmc_request_ids();
 // if ( !empty($requestIds) && !my_check_manage($requestIds) ) {
 //     wpmc_flash_message(sprintf(__('You cannot change the IDs: %s'), implode(',', $requestIds)), 'error');
-//     $entity->go_to_home();
+//     $entity->back_to_home();
 // }
 
 add_filter('wpmc_validation_errors', function($errors, $fields){
@@ -44,8 +44,10 @@ add_filter('wpmc_validation_errors', function($errors, $fields){
 add_filter('wpmc_before_delete_ids', function($ids, $entity){
     if ( !my_check_manage($ids) ) {
         wpmc_flash_message(sprintf(__('You cannot delete the IDs: %s'), implode(',', $ids)), 'error');
-        $entity->go_to_home();
+        $entity->back_to_home();
     }
+
+    return $ids;
 }, 10, 2);
 
 add_filter('wpmc_entity_find', function($row, $entity){
