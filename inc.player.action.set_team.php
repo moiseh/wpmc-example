@@ -44,7 +44,6 @@ add_filter('wpmc_run_action', function($action){
             <?php
         };
 
-        $title = __('Set player(s) team');
-        wpmc_default_action_form($title, $postCallback, $formCallback);
+        wpmc_default_action_form($postCallback, $formCallback, __('Set player(s) team'));
     }
 }, 10, 2);
