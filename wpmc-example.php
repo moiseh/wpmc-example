@@ -97,7 +97,7 @@ add_action('wpmc_before_entity', function($entity){
     // protect user from manage not allowed IDs and other policies
     require_once 'inc.global.security.php';
 
-    switch(wpmc_current_entity()) {
+    switch (wpmc_current_entity()) {
         case 'player':
             // example how to alter the default per-page listing rows
             add_filter('wpmc_list_per_page', function(){
@@ -105,7 +105,7 @@ add_action('wpmc_before_entity', function($entity){
             }, 10, 1);
 
             // example how to add custom actions
-            include __DIR__ . '/inc.player.action.set_team.php';
+            require_once __DIR__ . '/inc.player.actions.php';
         break;
         default:
         case 'my_entity_1':
