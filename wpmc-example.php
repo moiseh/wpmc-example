@@ -15,6 +15,7 @@ add_action('wpmc_entities', function($entities){
         'table_name' => 'mc_teams',
         'default_order' => 'name',
         'display_field' => 'name',
+        'menu_icon' => 'dashicons-admin-multisite',
         'singular' => 'Team',
         'plural' => 'Teams',
         'fields' => [
@@ -36,6 +37,7 @@ add_action('wpmc_entities', function($entities){
         'table_name' => 'mc_players',
         'default_order' => 'name',
         'display_field' => 'name',
+        'menu_icon' => 'dashicons-admin-users',
         'singular' => 'Player',
         'plural' => 'Players',
         'fields' => [
@@ -66,6 +68,7 @@ add_action('wpmc_entities', function($entities){
         'table_name' => 'mc_games',
         'default_order' => 'name',
         'display_field' => 'name',
+        'menu_icon' => 'dashicons-controls-play',
         'singular' => 'Game',
         'plural' => 'Games',
         'fields' => [
@@ -116,7 +119,7 @@ add_filter('wpmc_entity_query', function(WPMC_Query_Builder $query, WPMC_Entity 
     switch ( wpmc_current_entity() ) {
         case 'my_entity_1':
         case 'my_entiti_2':
-            $query->where("{$entity->tableName}.user_id", '=', get_current_user_id()); 
+            $query->where("{$entity->get_table()}.user_id", '=', get_current_user_id()); 
         break;
     }
     

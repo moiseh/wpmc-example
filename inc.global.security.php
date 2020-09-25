@@ -16,7 +16,7 @@ if ( !function_exists('my_check_manage') ) {
         if ( !empty($entity) ) {
             $uid = get_current_user_id();
             $ids = implode(',', (array) $ids);
-            $notAllowedIds = $wpdb->get_var("SELECT COUNT(id) FROM {$entity->tableName} WHERE id IN({$ids}) AND user_id <> {$uid}");
+            $notAllowedIds = $wpdb->get_var("SELECT COUNT(id) FROM {$entity->get_table()} WHERE id IN({$ids}) AND user_id <> {$uid}");
             if ( $notAllowedIds > 0 ) {
                 return false;
             }
