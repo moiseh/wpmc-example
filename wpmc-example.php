@@ -99,17 +99,11 @@ add_action('wpmc_before_entity', function($entity){
 
     switch (wpmc_current_entity()) {
         case 'player':
-            // example how to alter the default per-page listing rows
-            add_filter('wpmc_list_per_page', function(){
-                return 4;
-            }, 10, 1);
-
-            // example how to add custom actions
+            // custom Players list behaviors
+            require_once __DIR__ . '/inc.player.list.php';
+            
+            // custom Players list actions
             require_once __DIR__ . '/inc.player.actions.php';
-        break;
-        default:
-        case 'my_entity_1':
-        case 'my_entity_2':
         break;
     }
 });
