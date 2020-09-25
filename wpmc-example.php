@@ -49,7 +49,7 @@ add_action('wpmc_entities', function($entities){
             'lastname' => [
                 'label' => 'Last name',
                 'type' => 'text',
-                'restrict_to' => ['sort','view','add','edit'],
+                'listable' => false,
             ],
             'email' => [
                 'label' => 'E-mail',
