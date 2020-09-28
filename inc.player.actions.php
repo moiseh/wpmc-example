@@ -12,7 +12,7 @@ add_filter('wpmc_list_actions', function($actions, $item = []){
 add_filter('wpmc_bulk_actions', function($actions){
     $actions['set_team'] = __('Set team', 'wp-magic-crud');
     return $actions;
-}, 10, 2);
+});
 
 // "set_team" action executor
 add_action('wpmc_run_action_set_team', function($ids){
@@ -49,4 +49,4 @@ add_action('wpmc_run_action_set_team', function($ids){
             <?php
         },
     ]);
-}, 10, 2);
+});
