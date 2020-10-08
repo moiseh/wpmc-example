@@ -36,6 +36,7 @@ add_action('wpmc_entities', function($entities){
     $entities['player'] = [
         'table_name' => 'mc_players',
         'default_order' => 'name',
+        'display_menu' => false,
         'display_field' => 'name',
         'menu_icon' => 'dashicons-admin-users',
         'singular' => 'Player',
@@ -89,6 +90,19 @@ add_action('wpmc_entities', function($entities){
     ];
 
     return $entities;
+});
+
+// example how to check if db structure migration needs to run
+add_filter('wpmc_run_create_tables', function(){
+    $lastVersion = 13;
+    $dbVersion = get_option('wpmc_example_version');
+    
+    if ( $dbVersion != $lastVersion ) {
+        update_option('wpmc_example_version', $lastVersion);
+        return true;
+    }
+
+    return false;
 });
 
 // example how to add filters and/or actions just when viewing specific entity list or form
