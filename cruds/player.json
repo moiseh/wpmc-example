@@ -1,0 +1,57 @@
+{
+    "database": {
+        "table_name": "wpmc_players",
+        "primary_key": "id",
+        "default_order": "name",
+        "display_field": "name",
+        "auto_create_tables": true
+    },
+    "menu": {
+        "menu_icon": "dashicons-admin-users",
+        "parent_menu": "wpmc-example",
+        "display_menu": true,
+        "singular": "Player",
+        "plural": "Players"
+    },
+    "rest": {
+        "expose_as_rest": true
+    },
+    "actions": {
+        "set_team": {
+            "type": "fieldable",
+            "label": "Change player(s) team",
+            "callback": "wpmcSetPlayerTeamActionCallback",
+            "is_bulkable": true,
+            "expose_as_rest": true,
+            "field_parameters": {
+                "team_id": {
+                    "type": "belongs_to",
+                    "label": "Team",
+                    "required": true,
+                    "ref_entity": "team"
+                }
+            }
+        }
+    },
+    "fields": {
+        "name": {
+            "type": "text",
+            "label": "Name",
+            "required": true
+        },
+        "lastname": {
+            "type": "text",
+            "label": "Last name"
+        },
+        "email": {
+            "type": "email",
+            "label": "E-mail"
+        },
+        "team_id": {
+            "type": "belongs_to",
+            "label": "Team",
+            "required": true,
+            "ref_entity": "team"
+        }
+    }
+}

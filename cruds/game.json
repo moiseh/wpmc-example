@@ -1,0 +1,34 @@
+{
+    "database": {
+        "table_name": "wpmc_games",
+        "primary_key": "id",
+        "default_order": "name",
+        "display_field": "name",
+        "auto_create_tables": true
+    },
+    "menu": {
+        "menu_icon": "dashicons-controls-play",
+        "parent_menu": "wpmc-example",
+        "display_menu": true,
+        "singular": "Game",
+        "plural": "Games"
+    },
+    "rest": {
+        "expose_as_rest": true
+    },
+    "fields": {
+        "name": {
+            "type": "text",
+            "label": "Name",
+            "required": true
+        },
+        "players": {
+            "type": "has_many",
+            "label": "Players",
+            "ref_entity": "player",
+            "pivot_table": "mc_game_players",
+            "pivot_left": "game_id",
+            "pivot_right": "player_id"
+        }
+    }
+}

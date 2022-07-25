@@ -1,0 +1,32 @@
+{
+    "database": {
+        "table_name": "wpmc_teams",
+        "primary_key": "id",
+        "default_order": "name",
+        "display_field": "name",
+        "auto_create_tables": true
+    },
+    "menu": {
+        "menu_icon": "dashicons-admin-multisite",
+        "parent_menu": "wpmc-example",
+        "display_menu": true,
+        "singular": "Team",
+        "plural": "Teams"
+    },
+    "rest": {
+        "expose_as_rest": true
+    },
+    "fields": {
+        "name": {
+            "type": "text",
+            "label": "Name",
+            "required": true
+        },
+        "players": {
+            "type": "one_to_many",
+            "label": "Players",
+            "ref_entity": "player",
+            "ref_column": "team_id"
+        }
+    }
+}
