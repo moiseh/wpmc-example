@@ -4,6 +4,7 @@
 * Description: Provides a clean example of how to use Magic admin CRUD plugin for WordPress plugin
 * Version:     1.0
 * Author:      Moises Heberle
+* Author URI:  https://pluggablesoft.com/
 * License:     GPLv2 or later
 * License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
